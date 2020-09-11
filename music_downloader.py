@@ -25,11 +25,13 @@ prefix_link = 'https://www.youtube.com'
 download_location = (OS.getcwd()+'/tmp/') # puts the download in a temporary folder in the same working dir
 aud_loc = (OS.getcwd()+'/tmp/'+'/audio/')
 av_loc = (OS.getcwd()+'/tmp/' + '/av/')
+yt_link = ''
+title = ''
 sg.theme('DarkAmber')
 layout = [
-    [sg.Text('Search for video:'), sg.Input()],
-    [sg.Text('Audio Only?') ,sg.Checkbox(text = ' ', size=(1,1), default=False)],
-    [sg.Text('Save location:'), sg.Input(), sg.FileBrowse()],
+    [sg.Text('Search for video: '), sg.Input()],
+    [sg.Text('Audio Only?: ') ,sg.Checkbox(text = ' ', size=(1,1), default=False)],
+    [sg.Text('Save location: '), sg.Input(), sg.FileBrowse()],
     [sg.Button('Download'), sg.Button('Exit')],
 ]
 
@@ -45,7 +47,11 @@ def search(strng): #Fetch link
     yt_link = search_result.get("search_result")[0].get("link")
 
 def download(bol=False): #Fetch video
-    yt = YouTube(yt_link, on_progress_callback = progress_Check)
+    try:
+        yt = YouTube(yt_link, on_progress_callback = progress_Check)
+    except KeyError:
+        print("RIP There's a cifer")
+        return
     global title 
     title = yt.title
     if bol:
