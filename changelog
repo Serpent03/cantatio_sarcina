@@ -1,3 +1,3 @@
-=====x.x.x.x=====
+=====0.0.1=====
 Overhauled search in a way that it works and added custom save dirs and made it so that it can download videos too.
 Also, addressed cipher issue by using a modified version of pytube 3
